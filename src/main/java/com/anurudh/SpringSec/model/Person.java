@@ -1,8 +1,4 @@
-// package com.anurudh.SpringSec.model;
-
-// import org.springframework.stereotype.Component;
-
-// @Component
-// public class Person {
-//     public String name="Anurudh Singh";
-// }
+package com.anurudh.SpringSec.model;
+public class Person {
+    public String name="Anurudh Singh";
+}
