@@ -19,7 +19,15 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.function.Function;
-
+/*
+ * Code Summary:
+Secret Key Generation: The constructor generates an HMAC-SHA256 secret key, which is used to sign and verify the JWTs.
+Token Generation: The generateToken() method creates a JWT with a subject (username), an issue time, and a 30-hour expiration time, signing it with the secret key.
+Token Validation: The validateToken() method checks that the token is valid by comparing the token's subject with the username in the UserDetails and ensuring the token isn't expired.
+Token Claims Extraction: The service has various methods to extract claims from the token, such as the username (subject) and expiration date.
+JWT Parsing: The service uses Jwts.parser() to parse the token and verify it using the secret key.
+This service is critical for authenticating users using JWT in a stateless Spring Security application. It creates tokens during login and validates them for subsequent requests.
+ */
 @Service
 public class JWTService {
 
@@ -44,7 +52,7 @@ public class JWTService {
                 .add(claims)
                 .subject(username)
                 .issuedAt(new Date(System.currentTimeMillis()))
-                .expiration(new Date(System.currentTimeMillis() + 60 * 60 * 30))
+                .expiration(new Date(System.currentTimeMillis() + (60 * 60 * 30)))
                 .and()
                 .signWith(getKey())
                 .compact();
